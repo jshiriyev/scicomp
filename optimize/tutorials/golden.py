@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 if __name__ == "__main__":
     import setup
 
-from scicomp.optimize.univariate import dichotomous
+from optimize.univariate import dichotomous
 
 def objective1(x):
     return (x-2)**2+2

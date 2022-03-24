@@ -9,4 +9,6 @@ while True:
     
     path = os.path.dirname(path)
 
+print(path)
+
 sys.path.append(path)
