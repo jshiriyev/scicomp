@@ -1,13 +1,5 @@
-import os,sys
-
-cwd = os.getcwd()
-
-##sys.path.insert(0,cwd+'/'+'tmp')
-
 import numpy as np
 import matplotlib.pyplot as plt
-
-from tempObj import objective
 
 class annealing:
 
@@ -25,41 +17,29 @@ class annealing:
     number of parameters for each model (nop),
     minimum and maximum values for each parameter (m_min & m_max), and
     temperature profile (T, control parameter).
-
-    There is a testing function (funcobj.py) in the code which can be used to understand the algorithm.
-
-    sample inputs are:
-
-    50
-    3
-    2
-    0,0
-    10,10
-    straight
-
     """
     
-##    def __init__(self):
-##
-##        inpFile = open("sa.inp","r")
-##
-##        self.nog = int(inpFile.readline())
-##        self.nom = int(inpFile.readline())
-##        self.nop = int(inpFile.readline())
-##
-##        strmin = inpFile.readline()
-##        strmax = inpFile.readline()
-##
-##        self.m_min = np.array([])
-##        self.m_max = np.array([])
-##
-##        for mmin in strmin.replace(" ",",").split(','):
-##            self.m_min = np.append(self.m_min,float(mmin))
-##
-##        for mmax in strmax.replace(" ",",").split(','):
-##            self.m_max = np.append(self.m_max,float(mmax))
-##
-##        self.tempType = inpFile.readline().rstrip()
+    # def __init__(self):
+
+    #    inpFile = open("sa.inp","r")
+
+    #    self.nog = int(inpFile.readline())
+    #    self.nom = int(inpFile.readline())
+    #    self.nop = int(inpFile.readline())
+
+    #    strmin = inpFile.readline()
+    #    strmax = inpFile.readline()
+
+    #    self.m_min = np.array([])
+    #    self.m_max = np.array([])
+
+    #    for mmin in strmin.replace(" ",",").split(','):
+    #        self.m_min = np.append(self.m_min,float(mmin))
+
+    #    for mmax in strmax.replace(" ",",").split(','):
+    #        self.m_max = np.append(self.m_max,float(mmax))
+
+    #    self.tempType = inpFile.readline().rstrip()
 
     def __init__(self,m_min,m_max,nog,nom,nop):
         

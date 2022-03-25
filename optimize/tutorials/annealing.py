@@ -11,6 +11,19 @@ def objective(m):
     
     return energy
 
+"""
+This is a testing function (funcobj.py) in the code which can be used to understand the algorithm.
+
+sample inputs are:
+
+50
+3
+2
+0,0
+10,10
+straight
+"""
+
 from vfsa import annealing
 from plotting import historyPlot
 

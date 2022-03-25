@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 if __name__ == "__main__":
     import setup
 
-from optimize.univariate import dichotomous
+from optimize.univariate import golden
 
 def objective1(x):
     return (x-2)**2+2
@@ -24,14 +24,12 @@ def objective4(x):
 xL = -3
 xU = 3
 
-Gr = (5**(1/2)-1)/2
+golden(objective1,xL,xU,r=0.51,Nmax=10000,tol=1e-5)
 
-dichotomous(objective1,xL,xU,r=Gr,Nmax=200,tol=1e-5)
+# x = np.linspace(xL,xU,200)
 
-x = np.linspace(xL,xU,200)
+# plt.plot(x,objective1(x))
+# plt.xlabel('x-axis')
+# plt.ylabel('objective function')
 
-plt.plot(x,objective1(x))
-plt.xlabel('x-axis')
-plt.ylabel('objective function')
-
-plt.show()
+# plt.show()
