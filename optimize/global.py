@@ -10,28 +10,65 @@ import matplotlib.pyplot as plt
 from tempObj import objective
 
 class annealing:
+
+    """
+    This is the python2 version of the stochastic inversion algorithm Simulated Annealing
+    shown in the dissertation with the link below
+
+    https://www.pge.utexas.edu/images/pdfs/theses18/shiriyev_dis_18.pdf
+
+    page 85-88. In the algorithm the general approach of Simulated Annealing is
+    coupled with the ideas from Genetic Algorithm.
+
+    User needs to define number of generations (nog),
+    number of models in each generation (nom),
+    number of parameters for each model (nop),
+    minimum and maximum values for each parameter (m_min & m_max), and
+    temperature profile (T, control parameter).
+
+    There is a testing function (funcobj.py) in the code which can be used to understand the algorithm.
+
+    sample inputs are:
+
+    50
+    3
+    2
+    0,0
+    10,10
+    straight
+
+    """
     
-    def __init__(self):
+##    def __init__(self):
+##
+##        inpFile = open("sa.inp","r")
+##
+##        self.nog = int(inpFile.readline())
+##        self.nom = int(inpFile.readline())
+##        self.nop = int(inpFile.readline())
+##
+##        strmin = inpFile.readline()
+##        strmax = inpFile.readline()
+##
+##        self.m_min = np.array([])
+##        self.m_max = np.array([])
+##
+##        for mmin in strmin.replace(" ",",").split(','):
+##            self.m_min = np.append(self.m_min,float(mmin))
+##
+##        for mmax in strmax.replace(" ",",").split(','):
+##            self.m_max = np.append(self.m_max,float(mmax))
+##
+##        self.tempType = inpFile.readline().rstrip()
 
-        inpFile = open("sa.inp","r")
-
-        self.nog = int(inpFile.readline())
-        self.nom = int(inpFile.readline())
-        self.nop = int(inpFile.readline())
-
-        strmin = inpFile.readline()
-        strmax = inpFile.readline()
-
-        self.m_min = np.array([])
-        self.m_max = np.array([])
-
-        for mmin in strmin.replace(" ",",").split(','):
-            self.m_min = np.append(self.m_min,float(mmin))
-
-        for mmax in strmax.replace(" ",",").split(','):
-            self.m_max = np.append(self.m_max,float(mmax))
-
-        self.tempType = inpFile.readline().rstrip()
+    def __init__(self,m_min,m_max,nog,nom,nop):
+        
+        self.m_min = m_min
+        self.m_max = m_max
+        
+        self.nog = nog
+        self.nom = nom
+        self.nop = nop
 
     def temperature(self):
         

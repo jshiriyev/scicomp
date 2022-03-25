@@ -1,7 +1,7 @@
 if __name__ == "__main__":
     import setup
 
-def dichotomous(objective,xL,xU,r=1/2,Nmax=50,tol=1e-3):
+def golden(objective,xL,xU,r=1/2,Nmax=50,tol=1e-3):
     
     for i in range(Nmax):
 
