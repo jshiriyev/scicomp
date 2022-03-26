@@ -1,66 +1,60 @@
-import numpy as np
-
-def objective(m):
-    
-    nom = m.shape[0]
-    
-    inprod = np.sign(np.sinc(m))*np.power(np.abs(np.sinc(m)),1./4)
-    energy = np.power(1.-np.prod(inprod,1),2.)
-    
-#   energy.shape = (nom,1)
-    
-    return energy
-
-"""
-This is a testing function (funcobj.py) in the code which can be used to understand the algorithm.
-
-sample inputs are:
-
-50
-3
-2
-0,0
-10,10
-straight
-"""
-
-from vfsa import annealing
-from plotting import historyPlot
-
-import numpy as np
 import matplotlib.pyplot as plt
 
-nog = 100 
-nom = 25
-nop = 5
+import numpy as np
 
-m_min = np.ones([1,nop])*-10
-m_max = np.ones([1,nop])*10
+if __name__ == "__main__":
+    import setup
 
-model = annealing(m_min,m_max,nog,nom,nop)
+from optimize.global_search import annealing
 
-#T = model.temperature('straight')
-T = model.temperature('geometric')
-#T = model.temperature('reciprocal')
-#T = model.temperature('logarithmic')
+def testfunc(m):
 
-models,energy = model.iterating(T)
+    if type(m) is not np.ndarray:
+        m = np.array([m])
 
-plot = historyPlot(m_min,m_max,models,energy)
-plot.plot_error()
+    lhs = np.sign(np.sinc(m))
+    rhs = np.power(np.abs(np.sinc(m)),1./4)
+    
+    capi = np.prod(lhs*rhs,1)
+    cost = np.power(1.-capi,2.)
+    
+    return cost
 
-"""
-plt.figure(num=1)
+if __name__ == "__main__":
 
-X = np.array(range(1,nog+1))
+    m = np.linspace(-10,10,1000)
 
-plt.plot(X,T1)
-plt.plot(X,T2)
-plt.plot(X,T3)
-plt.plot(X,T4)
+    E = testfunc(np.array([m]).T)
 
-plt.xlim([0.,nog])
-plt.ylim([0.,1.])
+    plt.plot(m,E)
+    plt.show()
 
-plt.show()
-"""
+    # nog = 100   #50
+    # nom = 25    #3
+    # nop = 5     #2
+
+    # m_min = np.ones([1,nop])*-10    #0,0
+    # m_max = np.ones([1,nop])*10     #10,10
+
+    # model = annealing(m_min,m_max,nog,nom,nop)
+
+    # #T = model.temperature('straight') #straight
+    # T = model.temperature('geometric')
+    # #T = model.temperature('reciprocal')
+    # #T = model.temperature('logarithmic')
+
+    # model.iterating(testfunc)
+
+    # plt.figure(num=1)
+
+    # X = np.array(range(1,nog+1))
+
+    # plt.plot(X,T1)
+    # plt.plot(X,T2)
+    # plt.plot(X,T3)
+    # plt.plot(X,T4)
+
+    # plt.xlim([0.,nog])
+    # plt.ylim([0.,1.])
+
+    # plt.show()

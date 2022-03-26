@@ -19,7 +19,7 @@ class Poisson():
     """
     Finite Difference Solution of 2D Poisson's equation
 
-    \\del^2 U/\\del x^2+\\del^2 U/\\del y^2 = f(x,y)
+    # \\del^2 U/\\del x^2+\\del^2 U/\\del y^2 = f(x,y)
 
     with boundary conditions:
 

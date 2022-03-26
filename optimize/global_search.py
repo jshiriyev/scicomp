@@ -1,7 +1,12 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-class annealing:
+if __name__ == "__main__":
+    import setup
+
+class annealing():
+
+    """LOADING"""
 
     """
     This is the python2 version of the stochastic inversion algorithm Simulated Annealing
@@ -18,28 +23,6 @@ class annealing:
     minimum and maximum values for each parameter (m_min & m_max), and
     temperature profile (T, control parameter).
     """
-    
-    # def __init__(self):
-
-    #    inpFile = open("sa.inp","r")
-
-    #    self.nog = int(inpFile.readline())
-    #    self.nom = int(inpFile.readline())
-    #    self.nop = int(inpFile.readline())
-
-    #    strmin = inpFile.readline()
-    #    strmax = inpFile.readline()
-
-    #    self.m_min = np.array([])
-    #    self.m_max = np.array([])
-
-    #    for mmin in strmin.replace(" ",",").split(','):
-    #        self.m_min = np.append(self.m_min,float(mmin))
-
-    #    for mmax in strmax.replace(" ",",").split(','):
-    #        self.m_max = np.append(self.m_max,float(mmax))
-
-    #    self.tempType = inpFile.readline().rstrip()
 
     def __init__(self,m_min,m_max,nog,nom,nop):
         
@@ -50,8 +33,10 @@ class annealing:
         self.nom = nom
         self.nop = nop
 
-    def temperature(self):
+    def temperature(self,tempType="straight"):
         
+        self.tempType = tempType
+
         Tinit = 1.
         Tfnal = 1.e-2
         
@@ -59,16 +44,16 @@ class annealing:
         e = np.array(range(1,M+1))
         
         if self.tempType == "straight":
-           self.tmp = Tinit+(Tfnal-Tinit)/(M-1.)*(e-1.)
+            self.tmp = Tinit+(Tfnal-Tinit)/(M-1.)*(e-1.)
         elif self.tempType ==  "geometric":
-           self.tmp = Tinit*(Tfnal/Tinit)**((e-1.)/(M-1.))
+            self.tmp = Tinit*(Tfnal/Tinit)**((e-1.)/(M-1.))
         elif self.tempType == "reciprocal":
-           self.tmp = Tinit*Tfnal*(M-1)/(Tfnal*M-Tinit+(Tinit-Tfnal)*e)
+            self.tmp = Tinit*Tfnal*(M-1)/(Tfnal*M-Tinit+(Tinit-Tfnal)*e)
         elif self.tempType == "logarithmic":
-           self.tmp = Tinit*Tfnal*np.log((M+1)/2)/(Tfnal*np.log(M+1)- \
-                 Tinit*np.log(2)+(Tinit-Tfnal)*np.log(e+1))
+            self.tmp = Tinit*Tfnal*np.log((M+1)/2)/(Tfnal*np.log(M+1)- \
+            Tinit*np.log(2)+(Tinit-Tfnal)*np.log(e+1))
         
-    def iterating(self):
+    def iterating(self,objective):
         
         models = np.zeros([self.nom,self.nop,self.nog])
         energy = np.zeros([self.nog,self.nom]) 
@@ -78,11 +63,9 @@ class annealing:
         R1 = np.random.rand(self.nom,self.nop)
         
         m1 = self.m_min+R1*(self.m_max-self.m_min)
-        E1 = objective(m1).calculate()
+        E1 = objective(m1)
 
-        self.logfile = open("log.out","w")
-
-        self.logfile.write("iteration number 1 is complete...\n")
+        print("iteration number 1 is complete...")
 
         models[:,:,0] = m1
         energy[0,:] = E1
@@ -92,7 +75,7 @@ class annealing:
         for i in range(1,self.nog):
            
            m2 = self.offspring(m1,self.tmp[i])
-           E2 = objective(m2).calculate()
+           E2 = objective(m2)
            
            models[:,:,i] = m2
            energy[i,:] = E2
@@ -109,9 +92,7 @@ class annealing:
         
            m1,E1 = self.selection(m1,E1)
 
-           self.logfile.write("iteration number "+str(i+1)+" is complete...\n")
-
-        self.logfile.close()
+           print("iteration number "+str(i+1)+" is complete...")
 
         self.models = np.transpose(models,(2,1,0))
         self.energy = energy
@@ -157,8 +138,7 @@ class annealing:
            
         if ntry == 99:
 
-            self.logfile("ERROR: could not find search point")
-            sys.exit()
+            print("ERROR: could not find search point")
            
         return m_new
 
@@ -193,8 +173,5 @@ class annealing:
 
 if __name__ == "__main__":
 
-    srcCode = annealing()
-    srcCode.temperature()
-    srcCode.iterating()
-    srcCode.plotError()
+    pass
 
