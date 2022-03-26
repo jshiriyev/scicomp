@@ -1,7 +1,7 @@
 if __name__ == "__main__":
     import setup
 
-from optimize.root import bisection
+from optimize.root_find import bisection
 
 def func(x):
     return x**3-x-2
