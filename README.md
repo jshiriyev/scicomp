@@ -1,14 +1,25 @@
 # SciComp
 
-MathBox:
+Special \# Special mathematical functions:
 
-- **Unit Conversion:** by default codes are written to work with SI units. Thus, there is a need for a unit converter between field units and SI units.
+- **CoordSwitch:**
+- **EllipticTheta:**
 
 Numerics \# Numerical Solvers, Finite Element, Finite Difference and Method of Moments:
 
+- **derivate:** Numerical derivative based on Taylor series expansion
+- **integrate:** Numerical integration
 - **FinDiff:** Finite Difference Packaga
 - **FinElm:** Finite Element Package
 
 Optimize \# Inversion Algorithms:
 
-- **Simulated Annealing:**
+- **RootFind:**
+- **univariate:**
+- **multivariate:**
+- **GlobSearch:**
+
+Statistics \# Statistical Algorithms:
+
+- **heterogeneity:** Heterogeneity Measures
+- **correlation:** Correlation Measures
